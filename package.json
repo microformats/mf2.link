@@ -1,0 +1,11 @@
+{
+  "name": "mf2.link",
+  "version": "1.0.0",
+  "description": "Convert page contents to mf2 and serve a minimal HTML representation of the underlying content",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "capjamesg",
+  "license": "MIT 0"
+}

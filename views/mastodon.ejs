@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Post by <% data.account.username %></title>
+
+        <meta name="description" content="<%= data.content %>" />
+        
+        <meta property="og:title" content="Post by <%= data.account.username %>" />
+        <meta property="og:description" content="<%= data.content %>" />
+        <meta property="og:image" content="https://screenshot.jamesg.blog/?url=<%= data.url %>" />
+        <meta property="article:author" content="<%= data.account.username %>" />
+
+        <link rel="icon" href="https://mf2.link/favicon.png" type="image/x-icon" />
+
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <main class="h-entry">
+            <div class="author h-card">
+                <img src="<%= data.account.avatar %>" alt="<%= data.account.display_name %>'s profile picture" height="50" width="50" class="u-photo">
+                <div class="author-name">
+                    <h2><%= data.account.display_name %></h2>
+                    <p class="p-nickname"><a href="<%= data.account.url %>" class="u-url"><%= data.account.username %></a></p>
+                </div>
+            </div>
+            <blockquote>
+                <span class="e-content"><%- data.content %></span>
+            </blockquote>
+            <a href="<%= data.url %>" class="permalink"><time class="dt-published datelink" datetime="<%= data.created_at %>"><%= data.created_at %></time></a>
+            <div class="post-actions">
+                <a href="<%= data.url %>">❤️ <%= data.favourites_count %> likes</a>
+                <a href="<%= data.url %>">🔄 <%= data.reblogs_count %> reposts</a>
+                <a href="<%= data.url %>">💬 <%= data.replies_count %> replies</a>
+            </div>
+        </main>
+    </body>
+</html>
