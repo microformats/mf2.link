@@ -20,17 +20,17 @@
     </head>
     <body>
         <main class="h-entry">
-            <div class="author h-card">
+            <div class="author p-author h-card">
                 <img src="<%= data.account.avatar %>" alt="<%= data.account.display_name %>'s profile picture" height="50" width="50" class="u-photo">
                 <div class="author-name">
-                    <h2><%= data.account.display_name %></h2>
+                    <h2 class="p-name"><%= data.account.display_name %></h2>
                     <p class="p-nickname"><a href="<%= data.account.url %>" class="u-url"><%= data.account.username %></a></p>
                 </div>
             </div>
             <blockquote>
                 <span class="e-content"><%- data.content %></span>
             </blockquote>
-            <a href="<%= data.url %>" class="permalink"><time class="dt-published datelink" datetime="<%= data.created_at %>"><%= data.created_at %></time></a>
+            <a href="<%= data.url %>" class="permalink u-url u-uid"><time class="dt-published datelink" datetime="<%= data.created_at %>"><%= data.created_at %></time></a>
             <div class="post-actions">
                 <a href="<%= data.url %>">❤️ <%= data.favourites_count %> likes</a>
                 <a href="<%= data.url %>">🔄 <%= data.reblogs_count %> reposts</a>
