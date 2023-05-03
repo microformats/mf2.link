@@ -52,8 +52,6 @@ app.route("/mastodon").get(async (req, res) => {
         return;
     }
 
-    // https://indieweb.social/@capjamesg/110157549435454148
-
     var domain = new URL(url).hostname;
 
     var status_id = new URL(url).pathname.split("/");
@@ -74,6 +72,11 @@ app.route("/mastodon").get(async (req, res) => {
                 data: data
             });
         });
+    }).catch((err) => {
+        res.render("error", {
+            error: "There was an error retrieving this post."
+        });
+        return;
     });
 });
 
