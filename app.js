@@ -73,6 +73,7 @@ app.route("/mastodon").get(async (req, res) => {
             });
         });
     }).catch((err) => {
+        console.log(err);
         res.render("error", {
             error: "There was an error retrieving this post."
         });

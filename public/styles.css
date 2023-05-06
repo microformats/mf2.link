@@ -5,9 +5,6 @@
 html {
     padding: 10px;
 }
-img {
-    border-radius: 50%;
-}
 .author {
     display: flex;
     align-items: center;
