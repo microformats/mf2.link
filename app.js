@@ -52,9 +52,18 @@ app.route("/mastodon").get(async (req, res) => {
         return;
     }
 
-    var domain = new URL(url).hostname;
+    try {
+        var parsed_url = new URL(url);
+    } catch (e) {
+        res.render("error", {
+            error: "Invalid URL"
+        });
+        return;
+    }
 
-    var status_id = new URL(url).pathname.split("/");
+    var domain = parsed_url.hostname;
+
+    var status_id = parsed_url.pathname.split("/");
     
     status_id = status_id[status_id.length - 1];
 
@@ -67,13 +76,11 @@ app.route("/mastodon").get(async (req, res) => {
         }
     }).then((response) => {
         response.json().then((data) => {
-            console.log(data);
             res.render("mastodon", {
                 data: data
             });
         });
     }).catch((err) => {
-        console.log(err);
         res.render("error", {
             error: "There was an error retrieving this post."
         });
