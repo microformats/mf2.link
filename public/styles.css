@@ -4,6 +4,7 @@
 }
 html {
     padding: 10px;
+    border-top: 5px solid #6CA300;
 }
 .author {
     display: flex;
@@ -79,4 +80,9 @@ label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
+}
+@media screen and (min-width: 500px) {
+    input {
+        width: 100%;
+    }
 }
