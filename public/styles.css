@@ -21,6 +21,7 @@ blockquote {
     padding: 0;
     border-left: 5px solid #ccc;
     padding-left: 10px;
+    word-wrap: break-word;
 }
 main {
     max-width: 500px;
@@ -80,6 +81,57 @@ label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
+}
+.external-embed {
+    margin-top: 25px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.external-embed img {
+    margin-top: 0;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+.external-embed .text-card {
+    padding: 10px;
+}
+.external-embed .text-card .title {
+    font-size: 1.2em;
+    margin-top: 0;
+}
+.text-card .description {
+    color: black;
+}
+.poll {
+    margin-top: 25px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}
+.poll-answers {
+    list-style: none;
+    padding: 0;
+}
+.poll-answer {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-top: 10px;
+}
+.poll-answer p {
+    margin: 0;
+}
+.poll-answer:first-child {
+    padding-top: 0;
+}
+.poll-answer:last-child {
+    padding-bottom: 0;
+}
+progress {
+    width: 100%;
+    height: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 @media screen and (min-width: 500px) {
     input {

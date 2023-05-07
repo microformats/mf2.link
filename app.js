@@ -76,9 +76,49 @@ app.route("/mastodon").get(async (req, res) => {
         }
     }).then((response) => {
         response.json().then((data) => {
-            res.render("mastodon", {
-                data: data
-            });
+            var is_reply = data.in_reply_to_id != null;
+
+            // replace publish date with pretty date
+
+            var date = new Date(data.created_at);
+
+            data.created_at = date.toLocaleString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: true,
+            }).replace(",", "");
+    
+            if (is_reply) {
+                var reply_url = "https://" + domain + "/api/v1/statuses/" + data.in_reply_to_id;
+    
+                fetch(reply_url, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then((response) => {
+                    response.json().then((reply_data) => {
+                        res.render("mastodon", {
+                            data: data,
+                            reply: reply_data
+                        });
+                    });
+                }).catch((err) => {
+                    res.render("error", {
+                        error: "There was an error retrieving this post."
+                    });
+                    return;
+                });
+            } else {
+                res.render("mastodon", {
+                    data: data,
+                    reply: null
+                });
+            }
         });
     }).catch((err) => {
         res.render("error", {

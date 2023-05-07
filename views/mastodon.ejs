@@ -5,11 +5,11 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Post by <% data.account.username %></title>
+        <title>Post by <%= data.account.display_name %></title>
 
         <meta name="description" content="<%= data.content %>" />
         
-        <meta property="og:title" content="Post by <%= data.account.username %>" />
+        <meta property="og:title" content="Post by <%= data.account.display_name %>" />
         <meta property="og:description" content="<%= data.content %>" />
         <meta property="og:image" content="https://screenshot.jamesg.blog/?url=<%= data.url %>" />
         <meta property="article:author" content="<%= data.account.username %>" />
@@ -20,6 +20,9 @@
     </head>
     <body>
         <main class="h-entry">
+            <% if (reply) { %>
+                <p class="in-reply-to">In reply to a post from <a href="<%= reply.url %>" class="u-in-reply-to"><%= reply.account.display_name %></a></p>
+            <% } %>
             <div class="author p-author h-card">
                 <img src="<%= data.account.avatar %>" alt="<%= data.account.display_name %>'s profile picture" height="50" width="50" class="u-photo">
                 <div class="author-name">
@@ -29,6 +32,18 @@
             </div>
             <blockquote>
                 <span class="e-content"><%- data.content %></span>
+                <% if (data.poll) { %>
+                    <div class="poll">
+                        <ul class="poll-answers">
+                            <% data.poll.options.forEach(function(option) { %>
+                                <li class="poll-answer">
+                                    <p><%= option.title %> (<%= option.votes_count %> votes)</p>
+                                    <progress value="<%= option.votes_count %>" max="<%= data.poll.votes_count %>"></progress>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
                 <% if (data.media_attachments.length > 0) { %>
                     <div class="media-attachments">
                         <% data.media_attachments.forEach(function(media) { %>
@@ -45,6 +60,16 @@
                             <% } %>
                         <% }) %>
                     </div>
+                <% } %>
+                <% if (data.card) { %>
+                    <a href="<%= data.card.url %>" class="embed-url">
+                        <div class="external-embed">
+                            <div class="text-card">
+                                <p class="title"><%= data.card.title %></p>
+                                <p class="description"><%= data.card.description %></p>
+                            </div>
+                        </div>
+                    </a>
                 <% } %>
             </blockquote>
             <a href="<%= data.url %>" class="permalink u-url u-uid"><time class="dt-published datelink" datetime="<%= data.created_at %>"><%= data.created_at %></time></a>
