@@ -7,16 +7,22 @@
         
         <title>Post by <%= data.account.display_name %></title>
 
-        <meta name="description" content="<%= data.content %>" />
+        <meta property="description" content="<%= data.content %>
+        <% if (data.poll) { %><% data.poll.options.forEach(function(option) { %>
+[ ] <%= option.title %> (<%= option.votes_count %> votes)<% }) %><% } %>" />
         
         <meta property="og:title" content="Post by <%= data.account.display_name %>" />
-        <meta property="og:description" content="<%= data.content %>" />
+        <meta property="og:description" content="<%= data.content %>
+        <% if (data.poll) { %><% data.poll.options.forEach(function(option) { %>
+[ ] <%= option.title %> (<%= option.votes_count %> votes)<% }) %><% } %>" />
         <meta property="og:image" content="https://screenshot.jamesg.blog/?url=<%= data.url %>" />
         <meta property="article:author" content="<%= data.account.username %>" />
 
         <link rel="icon" href="https://mf2.link/logo.png" type="image/x-icon" />
 
         <link rel="stylesheet" href="/styles.css">
+
+        <link rel="canonical" href="<%= data.url %>" />
     </head>
     <body>
         <main class="h-entry">
